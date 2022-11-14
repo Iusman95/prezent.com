@@ -7,19 +7,20 @@
     <title>Document</title>
 </head>
 <body>
-    <center>
-        <h1>SignUp</h1>
-    
-    <form action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        <h5>Имя {{ form.username }}</h5>
-        <h5>Почта {{ form.mail }}</h5>
-        <h5>Пороль {{ form.password1 }}</h5>
-        <h5>Подверждение пороля {{ form.password2 }}</h5>
-        <h5>Описание {{ form.description }}</h5>
-            
+    <br><br>
+<center>
+    <h1>Sign Up</h1>
+    <form  method="post">
+        <h5>Username: {{ form.username }} </h5>
+        <h5>First name: {{ form.first_name }}</h5> 
+        <h5>Last name: {{ form.last_name }}</h5>
+        <h5>Email: {{ form.email }}</h5>
+        <h5>Password: {{ form.password1 }}</h5>
+        <h5>Config password: {{ form.password2 }}</h5>
+        {% csrf_token %} 
         <br>
-        <button> Создать аккаунт </button>
+        <br>
+        <button>Создать аккаунт</button>
     </form>
 </center>
 </body>
