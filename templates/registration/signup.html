@@ -11,15 +11,11 @@
 <center>
     <h1>Sign Up</h1>
     <form  method="post">
-        <h5>Username: {{ form.username }} </h5>
-        <h5>First name: {{ form.first_name }}</h5> 
-        <h5>Last name: {{ form.last_name }}</h5>
-        <h5>Email: {{ form.email }}</h5>
-        <h5>Password: {{ form.password1 }}</h5>
-        <h5>Config password: {{ form.password2 }}</h5>
         {% csrf_token %} 
-        <br>
-        <br>
+{% for f in form %}
+    <p><label class='form-label' for="{{ f.id_for_label }}">{{ f.label }}: </label>{{f}}</p>
+    <div class="form-error">{{ f.errors }}</div>
+{% endfor %}
         <button>Создать аккаунт</button>
     </form>
 </center>
