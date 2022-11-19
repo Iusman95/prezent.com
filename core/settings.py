@@ -40,8 +40,8 @@ INSTALLED_APPS = [
 
     #localapps
     'users', 
-    'profiles',
     'prezents',
+    'user_profile',
 ]
 
 MIDDLEWARE = [
