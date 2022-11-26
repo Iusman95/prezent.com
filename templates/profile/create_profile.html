@@ -1,10 +1,85 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form action="" method="post">
+<!-- <form action="" method="post">
     {{ form.as_p }}
     {% csrf_token %}
     <button>Сохранить изминения </button>
 </form>
+ -->
 
+
+<br>
+
+ <div class="container">
+    <div class="main-body">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                            <div class="mt-3">
+                                <h4>{{ object.username }}</h4>
+                                
+                        </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+           
+            <form action="" method="post">
+                {% csrf_token %}
+                <br>
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Username</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ form.username}}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">First name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ form.first_name }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Last name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ form.last_name }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ form.email }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">About me</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ form.description}}
+                            </div>
+                        </div>
+                    </div>
+                    <button>Сохранить изминения </button>
+                </div>
+                
+            </form>
+    </div>
+</div>
 {% endblock %}

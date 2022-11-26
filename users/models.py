@@ -5,6 +5,7 @@ from django.shortcuts import resolve_url
 
 class User(AbstractUser):
     description = models.TextField()
+    image = models.ImageField(upload_to='photo/', blank=True)
 
     def __str__(self) -> str:
         return self.username
