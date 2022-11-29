@@ -14,6 +14,4 @@ class User(AbstractUser):
         verbose_name = 'user'
         verbose_name_plural = 'users'
 
-    def get_absolute_url(self):
-        return resolve_url('myurl', kwargs={'id': self.id, 'username': self.username})
-
+    

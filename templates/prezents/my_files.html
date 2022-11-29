@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+    {% block content %}
+        {% for file in files %}
+            <div class="card" style="width: 9rem;">
+                <img src="{{  file.file.url }}" class="card-img-top" alt="200" width="100">
+                <div class="card-body">
+                    <h6 class="card-title"><a href="{{ file.file.url }}">Скачать файл</a></h6>
+                    <p class="card-text">{{ file.title }}</p>
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
+        
+{% endblock %}

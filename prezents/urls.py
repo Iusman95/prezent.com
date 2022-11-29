@@ -1,10 +1,9 @@
 from django.urls import path
-from prezents.views import index
+from . import views
 
 urlpatterns = [ 
-    path('index/', index, name='index'),
-    
-]
+    path('index/', views.index, name='index'),
+    path('upload_file/', views.add_image_on_profile, name='upload_file'),
+    path('my_files/', views.my_files, name='my_files'),  
+    ]
 
-
-"""   path('upload_file/', upload_file, name='upload_file'), """
