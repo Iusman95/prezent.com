@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from prezents.forms import DowlandFileForm, CreatePostForm, CommentForm
 from user_profile.models import Files
 from prezents.models import Post, Comment
-from django.views.generic import CreateView
+from django.urls import reverse
 
 
 
@@ -18,9 +18,18 @@ def index(request):
 
 def detail(request, pk):
     post =  get_object_or_404(Post, pk=pk)
+    comment_form = CommentForm()
+    comments = Comment.objects.filter(post=post)
+
+    context = {
+        'form': comment_form,
+        'post': post,
+        'comments': comments
+    }
+
     return render(request, 
             template_name='prezents/detail.html', 
-            context={'post': post})
+            context=context)
 
 
 
@@ -70,31 +79,18 @@ def add_post(request):
         context={'form_': form_})
 
 
-
-        
-
 def add_comment(request, pk):
-    
+
     if request.method == "POST":
         form = CommentForm(request.POST)
-        post = get_object_or_404(Post, pk=pk)
-        
+        post = get_object_or_404(Post, id=pk)
         if form.is_valid():
             form.save(commit=False)
             form.instance.user = request.user
             form.instance.post = post
             form.save()
-            return redirect('detail')
+            return redirect(reverse('detail', kwargs={'pk': pk}))
             
-    else:
-        form=CommentForm()
-    
-    
-        
-    return render(request, 
-        template_name='prezents/detail.html', 
-        context={'form': form}) 
-
 
 
 
