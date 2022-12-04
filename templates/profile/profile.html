@@ -122,9 +122,11 @@
                   </div>
                   <hr>
                   <div class="row">
+                    {% if user %}
                     <div class="col-sm-12">
                       <a class="btn btn-info " target="__blank" href="{% url 'create_profile' user.id %}">Edit</a>
                     </div>
+                    {% endif %}
                   </div>
                 </div>
               </div>

@@ -5,7 +5,7 @@ from users.models import User
 class Files(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
-    file = models.FileField(upload_to='photo/')
+    file = models.FileField(upload_to='my_files/')
     
     class Meta:
         verbose_name = 'Файл'

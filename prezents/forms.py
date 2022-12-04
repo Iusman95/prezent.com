@@ -1,7 +1,7 @@
 from django import forms
 from django.core import validators
 from user_profile.models import Files
-from prezents.models import Post
+from prezents.models import Post, Comment
     
 
 
@@ -34,5 +34,9 @@ class CreatePostForm(forms.ModelForm):
         model = Post
         fields = ['file', 'description']
 
+
+class CommentForm(forms.ModelForm):
     
-     
+    class Meta:
+        model = Comment    
+        fields = ['title', ]

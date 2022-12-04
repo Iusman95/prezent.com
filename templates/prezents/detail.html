@@ -2,20 +2,39 @@
 {% block content %}
 <br>
 <div class="container">
-    {% for post in posts %}
+
         <div class="card">
             <div class="card-header">
-                Автор   <a href="{% url 'user_profile' post.user.id %}">{{ post.user }}</a>
+                Автор {{ post.user }}
             </div>
             <div class="card-body">
               <h6 class="card-title"><a href="{{ post.file.url}}">Скачать</a></h6>
               <p class="card-text">{{ post.description }}</p>
-              <a href="{% url 'detail' post.pk %}" class="btn btn-primary">Подробнее</a>
             </div>
           </div>
           <br>
-        {% endfor %}    
-      </div>
 
-</center>
-{% endblock %} 
+<br>
+<br>
+<br>
+
+
+ <form action='{% url "detail" post.id %}' method="post">
+  {% csrf_token %}
+  {{ form.as_p  }}
+  <button>отправить</button>
+  
+ </form>   
+ 
+ {% for comment in comments %}
+ {{ comment.user }}
+ {{ comment.title }}
+ {{ comment.data }}
+ {% endfor %}
+
+</div>
+
+
+
+{% endblock %}
+

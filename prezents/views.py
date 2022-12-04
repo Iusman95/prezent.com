@@ -1,15 +1,29 @@
-from django.shortcuts import render, redirect
-from prezents.forms import DowlandFileForm, CreatePostForm
+from django.shortcuts import render, redirect, get_object_or_404
+from prezents.forms import DowlandFileForm, CreatePostForm, CommentForm
 from user_profile.models import Files
-from prezents.models import Post
+from prezents.models import Post, Comment
+from django.views.generic import CreateView
 
 
-#Представление для главной страницы для вывода всех загруженных данных 
+
+
+#Представление для вывода постов
 def index(request):
     posts = Post.objects.all()
     return render(request, 
         template_name='prezents/index.html',
         context={'posts': posts})
+
+
+
+def detail(request, pk):
+    post =  get_object_or_404(Post, pk=pk)
+    return render(request, 
+            template_name='prezents/detail.html', 
+            context={'post': post})
+
+
+
 
 
 #Представление для страницы "my_files"
@@ -18,6 +32,8 @@ def my_files(request):
     return render(request, 
         template_name='prezents/my_files.html', 
         context={'files': files})
+
+
 
 
 #Представление для загрузки фотографий на профиль
@@ -35,6 +51,9 @@ def add_image_on_profile(request):
         template_name='prezents/upload_file.html', 
         context={'form_two': form_two})
 
+
+
+
 #Представление для сохранение поста
 def add_post(request):
     if request.method == "POST":
@@ -49,4 +68,62 @@ def add_post(request):
     return render(request, 
         template_name='prezents/upload_index.html', 
         context={'form_': form_})
+
+
+
         
+
+def add_comment(request, pk):
+    
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        post = get_object_or_404(Post, pk=pk)
+        
+        if form.is_valid():
+            form.save(commit=False)
+            form.instance.user = request.user
+            form.instance.post = post
+            form.save()
+            return redirect('detail')
+            
+    else:
+        form=CommentForm()
+    
+    
+        
+    return render(request, 
+        template_name='prezents/detail.html', 
+        context={'form': form}) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+""" from pptx import Presentation  
+
+def prezent(request):
+    root = Presentation() #создание объекта презентации
+    first_slide_layout = root.slide_layouts[0] # создание макета слайда
+    slide = root.slides.add_slide(first_slide_layout) # Создание объекта слайда для добавления  в ppt, т.е. прикрепление слайдов с презентацией, т.е. ppt
+    slide.shapes.title.text = "Привет"
+    slide.placeholders[1].text = " This is 2nd way"
+    root.save("Output.pptx")
+    print("done")
+    return render(request, 
+            template_name='prezents/prezent.html', 
+            context={'root': root})  """
